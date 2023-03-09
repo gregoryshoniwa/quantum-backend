@@ -1,0 +1,6 @@
+install pm2
+    npm install pm2 -g
+
+Start App
+    go to the respective folder
+    pm2 start index.js --name "nenyasha" --watch
