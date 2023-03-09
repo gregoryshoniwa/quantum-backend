@@ -126,56 +126,6 @@ async function executeQueryCreateTran(resp,query){
 		
 
     });
-// 	console.log(query);
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		//sql.close()
-// 		console.error('Error in transaction begin', err);
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
-
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-//         }
-		
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-// 		}
-		
-// 		,
-// 		three: function(callback){
-//             request.query(query[2], callback);
-//         }
-		
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				//sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				//sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//sql.close();
-// 			resp.json({data:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
 	
 }
 
@@ -220,60 +170,6 @@ async function executeQueryCreateTran4(resp,query){
 		
 
     });
-	//console.log(query);
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		//sql.close()
-// 		//console.error('Error in transaction begin', err);
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
-
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-//         }
-		
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-// 		}
-		
-// 		,
-// 		three: function(callback){
-//             request.query(query[2], callback);
-//         }
-// 		,
-// 		four: function(callback){
-//             request.query(query[3], callback);
-//         }
-		
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				//sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				//sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//sql.close();
-// 			resp.json({data:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
 	
 }
 
@@ -324,64 +220,7 @@ async function executeQueryCreateTran5(resp,query){
 		
 
     });
-// 	//console.log(query);
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		//sql.close()
-// 		//console.error('Error in transaction begin', err);
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
 
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-//         }
-		
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-// 		}
-		
-// 		,
-// 		three: function(callback){
-//             request.query(query[2], callback);
-//         }
-// 		,
-// 		four: function(callback){
-//             request.query(query[3], callback);
-//         },
-		
-// 		five: function(callback){
-//             request.query(query[4], callback);
-//         }
-		
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				//sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				//sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//sql.close();
-// 			resp.json({data:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
 	
 }
 
@@ -413,52 +252,7 @@ async function executeQueryCreateTranApprove(resp,query){
 		
 
     });
-	//console.log(query);
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		//sql.close()
-// 		//console.error('Error in transaction begin', err);
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
-
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-//         }
-		
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-// 		}
-			
-		
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				//sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				//sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//sql.close();
-// 			resp.json({data:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
+	
 	
 }
 
@@ -489,52 +283,7 @@ async function executeQueryCreateRates(resp,query){
 		
 
     });
-	//console.log(query);
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		//sql.close()
-// 		//console.error('Error in transaction begin', err);
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
-
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-//         }
-		
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-// 		}
-			
-		
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				//sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				//sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//sql.close();
-// 			resp.json({data:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
+	
 	
 }
 
@@ -564,51 +313,7 @@ async function executeQueryContiSend(resp,query,data){
 		
 
     });
-// 	//console.log(query)
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		sql.close();
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
 
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-// 		}
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-			
-// 		}
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//console.log(query[3],data)
-// 			//createUser(data)
-// 			sql.close();
-// 			resp.json({message:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
 	
 }
 
@@ -640,51 +345,7 @@ async function executeQueryCreateUser(resp,query,data){
 		
 
     });
-	//console.log(query)
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		sql.close();
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
-
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-// 		}
-// 		,
-//         two: function(callback){
-//             request.query(query[1], callback);
-			
-// 		}
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-// 			//console.log(query[3],data)
-// 			createUser(data)
-// 			sql.close();
-// 			resp.json({message:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
+	
 
 
 	
@@ -707,46 +368,6 @@ async function executeQueryCreateUserPass(resp,query){
 		resp.json({message:{one:{recordset:mainData}}})
     });
 
-	//console.log(query)
-// 	const pool = await poolPromise
-// 	var transaction = new sql.Transaction(pool);
-// transaction.begin(function(err) {
-//     if (err) {
-// 		sql.close();
-//         return resp.json({message:err}) //console.error('Error in transaction begin', err);
-//     }
- 
-//     var request = new sql.Request(transaction);
-
-//     async.series({
-//         one: function(callback){
-//             request.query(query[0], callback);
-// 		}
-		
-//     },
-//     function(err, results) {
-//         // results is now equal to: {one: [{a: 1}], two: [{b: 2}]}
-//         if (err) {
-// 			//console.error('Error in queries, rolling back', err);
-// 			var mainerr = err.originalError.info.message
-//             return transaction.rollback().catch(err =>{
-// 				sql.close();
-// 				resp.json({message:mainerr,error:err})
-// 			})
-//         }
-//         transaction.commit(function(err) {
-//             if (err) {
-// 				sql.close();
-//                 return res.json({message:err}) //console.error('Error in commit', err);
-// 			}
-			
-// 			sql.close();
-// 			resp.json({message:results})
-//             //console.log("Transaction commited.");
-//             //console.log(results);
-//         });
-//     });
-// });
 	
 }
 
