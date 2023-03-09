@@ -70,13 +70,13 @@ global.conticash = mysql.createPool({
 	host: "localhost",
 	user: "root",
 	password: "JesusChrist@@11",
-	database: "nenyasha_bdc",
+	database: "quantum_bdc",
 	port: 3306
   });
    
   conticash.getConnection(err => {
 	if (!err) {
-	  console.log("ContiCash connection Successful.");
+	  console.log("Quantum 1.0.0 connection Successful.");
 	} else {
 	  console.log(
 		"ContiCash connection failed  \n Error :" + JSON.stringify(err, undefined, 2)
