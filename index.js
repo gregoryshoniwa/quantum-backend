@@ -64,6 +64,7 @@ const socket = io(http);
   app.use(cors());
  
  
+  
 global.conticash = mysql.createPool({
 	connectionLimit : 5000,
 	multipleStatements: "true",
