@@ -1,5 +1,4 @@
 const util = require('util');
-
 global.mysql  = require('mysql');
 const express = require("express");
 const path = require("path");
