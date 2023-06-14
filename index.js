@@ -1499,7 +1499,7 @@ app.post("/updateTellerToBranchFloat",verifyToken, (req,res) => {
 			var query1 = `UPDATE Branch_Float SET amount = amount - '${req.body.amount}' WHERE branch_id = '${req.body.branch_id}' and currency_id = '${req.body.currency_id}'`;
 			var query2 = `UPDATE User_Float SET amount = amount + '${req.body.amount}' WHERE user_id = '${req.body.user_id}' and currency_id = '${req.body.currency_id}'`;
 			var query3 = `INSERT Float_Transactions (handover_type,amount,currency_id,from_user_id,to_user_id,from_branch_id,to_branch_id,created_by) VALUES ('${req.body.handover_type}','${req.body.amount}','${req.body.currency_id}','0','${req.body.user_id}','${req.body.branch_id}','0','${req.body.created_by}')`;
-			var query4 = `INSERT Transactions (client_id,transaction_type_id,receive_amount,disburse_amount,rate,disburse_currency_id,receive_currency_id,branch_id,status,created_by) VALUES ('113','3','${req.body.amount}','0','0','${req.body.currency_id}','${req.body.currency_id}','${req.body.branch_id}','4','${req.body.user_id}')`;
+			var query4 = `INSERT Transactions (client_id,transaction_type_id,receive_amount,disburse_amount,rate,disburse_currency_id,receive_currency_id,branch_id,status,created_by) VALUES ('1','3','${req.body.amount}','0','0','${req.body.currency_id}','${req.body.currency_id}','${req.body.branch_id}','4','${req.body.created_by}')`;
 			
 			var queries = []
 			queries.push(query1)
@@ -1524,14 +1524,16 @@ app.post("/updateTreasuryToBranchFloat",verifyToken, (req,res) => {
 			var query1 = `UPDATE Branch_Float SET amount = amount + '${req.body.amount}' WHERE branch_id = '${req.body.branch_id}' and currency_id = '${req.body.currency_id}'`;
 			var query2 = `UPDATE Treasury_Float SET amount = amount - '${req.body.amount}' WHERE currency_id = '${req.body.currency_id}'`;
 			var query3 = `INSERT Float_Transactions (handover_type,amount,currency_id,from_user_id,to_user_id,from_branch_id,to_branch_id,created_by) VALUES ('${req.body.handover_type}','${req.body.amount}','${req.body.currency_id}','0','0','1','${req.body.branch_id}','${req.body.created_by}')`;
+			var query4 = `INSERT Transactions (client_id,transaction_type_id,receive_amount,disburse_amount,rate,disburse_currency_id,receive_currency_id,branch_id,status,created_by) VALUES ('1','3','${req.body.amount}','0','0','${req.body.currency_id}','${req.body.currency_id}','${req.body.branch_id}','4','${req.body.created_by}')`;
 			
 			var queries = []
 			queries.push(query1)
 			queries.push(query2)
 			queries.push(query3)
+			queries.push(query4)
 
 			//res.send(queries)  
-	        executeQueryCreateTran(res, queries).catch(err =>{
+	        executeQueryCreateTran4(res, queries).catch(err =>{
 			 	console.log(err)
 	        })
 		  }
@@ -1546,14 +1548,16 @@ app.post("/updateTreasuryToBranchFloat",verifyToken, (req,res) => {
 			var query1 = `UPDATE Branch_Float SET amount = amount - '${req.body.amount}' WHERE branch_id = '${req.body.branch_id}' and currency_id = '${req.body.currency_id}'`;
 			var query2 = `UPDATE Treasury_Float SET amount = amount + '${req.body.amount}' WHERE currency_id = '${req.body.currency_id}'`;
 			var query3 = `INSERT Float_Transactions (handover_type,amount,currency_id,from_user_id,to_user_id,from_branch_id,to_branch_id,created_by) VALUES ('${req.body.handover_type}','${req.body.amount}','${req.body.currency_id}','0','0','${req.body.branch_id}','1','${req.body.created_by}')`;
+			var query4 = `INSERT Transactions (client_id,transaction_type_id,receive_amount,disburse_amount,rate,disburse_currency_id,receive_currency_id,branch_id,status,created_by) VALUES ('1','3','${req.body.amount}','0','0','${req.body.currency_id}','${req.body.currency_id}','${req.body.branch_id}','4','${req.body.created_by}')`;
 			
 			var queries = []
 			queries.push(query1)
 			queries.push(query2)
 			queries.push(query3)
+			queries.push(query4)
 
 			//res.send(queries)  
-	        executeQueryCreateTran(res, queries).catch(err =>{
+	        executeQueryCreateTran4(res, queries).catch(err =>{
 			 	console.log(err)
 	        })
 		  }
@@ -1571,14 +1575,16 @@ app.post("/updateTellerToTellerFloat",verifyToken, (req,res) => {
 			var query1 = `UPDATE User_Float SET amount = amount + '${req.body.amount}' WHERE user_id = '${req.body.to_user_id}' and currency_id = '${req.body.currency_id}'`;
 			var query2 = `UPDATE User_Float SET amount = amount - '${req.body.amount}' WHERE user_id = '${req.body.from_user_id}' and currency_id = '${req.body.currency_id}'`;
 			var query3 = `INSERT Float_Transactions (handover_type,amount,currency_id,from_user_id,to_user_id,from_branch_id,to_branch_id,created_by) VALUES ('${req.body.handover_type}','${req.body.amount}','${req.body.currency_id}','${req.body.from_user_id}','${req.body.to_user_id}','0','0','${req.body.created_by}')`;
+			var query4 = `INSERT Transactions (client_id,transaction_type_id,receive_amount,disburse_amount,rate,disburse_currency_id,receive_currency_id,branch_id,status,created_by) VALUES ('1','3','${req.body.amount}','0','0','${req.body.currency_id}','${req.body.currency_id}','${req.body.branch_id}','4','${req.body.created_by}')`;
 			
 			var queries = []
 			queries.push(query1)
 			queries.push(query2)
 			queries.push(query3)
+			queries.push(query4)
 
 			//res.send(queries)  
-	        executeQueryCreateTran(res, queries).catch(err =>{
+	        executeQueryCreateTran4(res, queries).catch(err =>{
 			 	console.log(err)
 	        })
 		  }
@@ -1594,14 +1600,16 @@ app.post("/updateTellerToTellerFloat",verifyToken, (req,res) => {
 			var query1 = `UPDATE Branch_Float SET amount = amount + '${req.body.amount}' WHERE branch_id = '${req.body.to_branch_id}' and currency_id = '${req.body.currency_id}'`;
 			var query2 = `UPDATE Branch_Float SET amount = amount - '${req.body.amount}' WHERE branch_id = '${req.body.from_branch_id}' and currency_id = '${req.body.currency_id}'`;
 			var query3 = `INSERT Float_Transactions (handover_type,amount,currency_id,from_user_id,to_user_id,from_branch_id,to_branch_id,created_by) VALUES ('${req.body.handover_type}','${req.body.amount}','${req.body.currency_id}','','','${req.body.from_branch_id}','${req.body.to_branch_id}','${req.body.created_by}')`;
+			var query4 = `INSERT Transactions (client_id,transaction_type_id,receive_amount,disburse_amount,rate,disburse_currency_id,receive_currency_id,branch_id,status,created_by) VALUES ('1','3','${req.body.amount}','0','0','${req.body.currency_id}','${req.body.currency_id}','${req.body.branch_id}','4','${req.body.created_by}')`;
 			
 			var queries = []
 			queries.push(query1)
 			queries.push(query2)
 			queries.push(query3)
+			queries.push(query4)
 
 			//res.send(queries)  
-	        executeQueryCreateTran(res, queries).catch(err =>{
+	        executeQueryCreateTran4(res, queries).catch(err =>{
 			 	console.log(err)
 	        })
 		  }
@@ -4663,9 +4671,22 @@ app.post("/getTransactionsByColBranch", verifyToken, (req,res) =>{
 		if(err){
 			res.json(err)
 		}else{
-			var query = `select A.*,B.receive_currency from (select Transactions.id,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,(Users.username) as created_by,(Users.id) as created_by_id,(Status.name) as status,(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id and Users.branch_id = ${req.body.branch_id}) as A
-                         join (select Transactions.id,(Currencies.iso_code) as receive_currency from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id order by A.created_at desc`;
-	
+			
+			// var query = `select A.*,B.receive_currency from (select Transactions.id,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,(Users.username) as created_by,(Users.id) as created_by_id,(Status.name) as status,(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id and Users.branch_id = ${req.body.branch_id}) as A
+            //              join (select Transactions.id,(Currencies.iso_code) as receive_currency from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id order by A.created_at desc`;
+			var query = `select A.*,B.receive_currency from (select t.id,DATE_FORMAT(t.created_at,'%a %D %b %H:%i %p') as created_at, 
+							t.receive_amount,t.disburse_amount,t.rate,c.id_number,c.first_name,c.last_name,ty.name AS transaction_type,
+							curr.symbol AS disburse_currency,u.username AS created_by,u.id AS created_by_id,s.name AS status,b.name
+							from transactions t
+							INNER JOIN Clients c ON t.client_id = c.id
+							INNER JOIN Transaction_Type ty ON t.transaction_type_id = ty.id
+							INNER JOIN Currencies curr ON t.disburse_currency_id = curr.id
+							INNER JOIN Users u ON t.created_by = u.id
+							INNER JOIN Status s ON t.status = s.id
+							INNER JOIN Branches b ON t.branch_id = b.id
+							where t.branch_id = ${req.body.branch_id}) as A
+							join (select Transactions.id,(Currencies.iso_code) as receive_currency 
+							from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id order by A.created_at desc`;
 			
 			
 	executeQuery(res, query).catch(err =>{
