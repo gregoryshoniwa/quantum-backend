@@ -5777,7 +5777,7 @@ app.post("/getUserFloatByCol4", verifyToken, (req,res) =>{
 		if(err){
 			res.json(err)
 		}else{
-			var query = `select User_Float.*,Currencies.symbol,Currencies.image,Users.first_name,Users.last_name from User_Float,Currencies,Users where User_Float.currency_id = Currencies.id and User_Float.user_id = Users.id and User_Float.${req.body.col} = '${req.body.value}' and User_Float.${req.body.col2} = '${req.body.value2}' and Users.branch_id = '${req.body.value2}'`;
+			var query = `select User_Float.*,Currencies.symbol,Currencies.image,Users.first_name,Users.last_name from User_Float,Currencies,Users where User_Float.currency_id = Currencies.id and User_Float.user_id = Users.id and User_Float.${req.body.col} = '${req.body.value}' and User_Float.${req.body.col2} = '${req.body.value2}' and Users.branch_id = '${req.body.value2}' and Users.user_type = 2`;
 			executeQuery(res, query).catch(err =>{
 		console.log(err) 
 	})
