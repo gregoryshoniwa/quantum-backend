@@ -6372,7 +6372,7 @@ app.put("/updateRates", verifyToken, (req,res) =>{
 			var query = `select T2.username as username,SUM(U0.amount) as amount,T3.symbol from User_Float U0
 							inner join Users T2 on U0.user_id = T2.id
 							inner join Currencies T3 on U0.currency_id = T3.id
-							where U0.branch_id = ${req.body.branch_id} and T2.branch_id = ${req.body.branch_id}
+							where U0.branch_id = ${req.body.branch_id} and T2.branch_id = ${req.body.branch_id} and T2.user_type = 2
 							group by T3.symbol,T2.username`;
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
