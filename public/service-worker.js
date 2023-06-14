@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.49c5eb4078edcc98f1a735b6334ec30b.js"
+  "/precache-manifest.92d2b7c3d357cbce1b0be7fd48d711fa.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "quantum"});
