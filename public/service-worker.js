@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.f590c5496c7c081b6b20ac41374de05e.js"
+  "/precache-manifest.c6af1681cf35e69b7d376ae76b83ba04.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "conticash"});
+workbox.core.setCacheNameDetails({prefix: "quantum"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to

@@ -90,7 +90,7 @@ export default {
             
 
                // console.log(logintext)
-                await axios.get(`http://localhost:8081/getRateBoard`)
+                await axios.get(`/getRateBoard`)
                   .then(response => {
                    
                     this.rates = response.data.data.one.recordset

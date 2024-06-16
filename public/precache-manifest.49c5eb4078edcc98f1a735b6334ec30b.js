@@ -4,20 +4,20 @@ self.__precacheManifest = [
     "url": "/js/about.5d347720.js"
   },
   {
-    "revision": "40df39c958e7703fd1f0",
-    "url": "/css/app.facc87ca.css"
+    "revision": "b1bc42a46170f5b58a1f",
+    "url": "/css/app.1b82bc17.css"
   },
   {
-    "revision": "40df39c958e7703fd1f0",
-    "url": "/js/app.feea0a66.js"
+    "revision": "b1bc42a46170f5b58a1f",
+    "url": "/js/app.577e858e.js"
   },
   {
-    "revision": "d1aad319425f80395944",
+    "revision": "9dfaca01615e9fe81ad6",
     "url": "/css/chunk-vendors.1c0d423c.css"
   },
   {
-    "revision": "d1aad319425f80395944",
-    "url": "/js/chunk-vendors.22321caa.js"
+    "revision": "9dfaca01615e9fe81ad6",
+    "url": "/js/chunk-vendors.ff52bf56.js"
   },
   {
     "revision": "aca995b2122f85b4a616b9b7ce7eb52b",
@@ -64,16 +64,12 @@ self.__precacheManifest = [
     "url": "/img/teller_refloat.b66ca0a1.png"
   },
   {
-    "revision": "d96caa28ac3a1d6c76bfc4234bb89b02",
-    "url": "/img/main_logo.d96caa28.png"
+    "revision": "96032b694d734935fe82a2b3fba2d708",
+    "url": "/img/main_logo.96032b69.png"
   },
   {
     "revision": "d9b7cdda09514b2bca14610df7053abd",
     "url": "/img/tellertobranch.fw.d9b7cdda.png"
-  },
-  {
-    "revision": "531b0e39277951a9d048e46a2483a5b7",
-    "url": "/img/bgtop2.531b0e39.png"
   },
   {
     "revision": "95b7c927b5f0e6aa3bbd8a7320242b71",
@@ -84,6 +80,10 @@ self.__precacheManifest = [
     "url": "/img/tellertoteller.fw.5fb49d26.png"
   },
   {
+    "revision": "531b0e39277951a9d048e46a2483a5b7",
+    "url": "/img/bgtop2.531b0e39.png"
+  },
+  {
     "revision": "61ae9b8b8b635c5018ac9617a8bf82f0",
     "url": "/img/branchtoteller.fw.61ae9b8b.png"
   },
@@ -92,16 +92,16 @@ self.__precacheManifest = [
     "url": "/img/avator4.72ce0bc0.png"
   },
   {
+    "revision": "96c476804d7a788cc1c05351b287ee41",
+    "url": "/fonts/MaterialIcons-Regular.96c47680.eot"
+  },
+  {
     "revision": "29b882f018fa6fe75fd338aaae6235b8",
     "url": "/fonts/MaterialIcons-Regular.29b882f0.woff"
   },
   {
     "revision": "0509ab09c1b0d2200a4135803c91d6ce",
     "url": "/fonts/MaterialIcons-Regular.0509ab09.woff2"
-  },
-  {
-    "revision": "96c476804d7a788cc1c05351b287ee41",
-    "url": "/fonts/MaterialIcons-Regular.96c47680.eot"
   },
   {
     "revision": "da4ea5cdfca6b3baab285741f5ccb59f",
@@ -116,7 +116,11 @@ self.__precacheManifest = [
     "url": "/img/logo.fw.c0be96e3.png"
   },
   {
-    "revision": "b2706a52998ddb6d7ab86f7a5c2a2757",
+    "revision": "a5cb2e5bfb8314737bf1a602661ac15c",
+    "url": "/img/main_logo2.a5cb2e5b.png"
+  },
+  {
+    "revision": "72d6fb7cf839cdfb9a4b83663d4f6a76",
     "url": "/index.html"
   },
   {
@@ -140,52 +144,52 @@ self.__precacheManifest = [
     "url": "/img/bg.dac20efd.jpg"
   },
   {
-    "revision": "a7ab5338187116789c754820232366df",
-    "url": "/img/bgtop.a7ab5338.jpg"
-  },
-  {
     "revision": "994a6d9b95e90e2d8d583491448acd8a",
     "url": "/img/bank.fw.994a6d9b.png"
-  },
-  {
-    "revision": "fb4bdff388aba6de269839e28f2aae12",
-    "url": "/img/branchtoteller.fw.fb4bdff3.png"
   },
   {
     "revision": "17e95c4f0c07b14e63e7ff24f3c1c291",
     "url": "/img/branchtobranch.fw.17e95c4f.png"
   },
   {
+    "revision": "a7ab5338187116789c754820232366df",
+    "url": "/img/bgtop.a7ab5338.jpg"
+  },
+  {
     "revision": "e498c597ec2643f83712b5d685aa7200",
     "url": "/img/branchtotreasary.fw.e498c597.png"
-  },
-  {
-    "revision": "15648e4eea97f062f1fbffe55cdb8fbb",
-    "url": "/img/buy.15648e4e.png"
-  },
-  {
-    "revision": "703bc1e2720f6e884cf9d50f920ae7d4",
-    "url": "/img/conticashicon.png"
   },
   {
     "revision": "dfc9a3a5905dc60be67f68588abab231",
     "url": "/img/buy.dfc9a3a5.png"
   },
   {
-    "revision": "ffbd119d0f211fadc41b19316f164b35",
-    "url": "/img/buys.png"
-  },
-  {
-    "revision": "31bf3c98cd1730d8bbf1b0dfae84e0b7",
-    "url": "/img/clients.fw.31bf3c98.png"
+    "revision": "fb4bdff388aba6de269839e28f2aae12",
+    "url": "/img/branchtoteller.fw.fb4bdff3.png"
   },
   {
     "revision": "52b3f529d452d350857eccef27257fc4",
     "url": "/img/contisendicon.png"
   },
   {
-    "revision": "3b637efdccd80f92a3750e066c1eb0b7",
-    "url": "/img/currency.fw.3b637efd.png"
+    "revision": "ffbd119d0f211fadc41b19316f164b35",
+    "url": "/img/buys.png"
+  },
+  {
+    "revision": "703bc1e2720f6e884cf9d50f920ae7d4",
+    "url": "/img/conticashicon.png"
+  },
+  {
+    "revision": "15648e4eea97f062f1fbffe55cdb8fbb",
+    "url": "/img/buy.15648e4e.png"
+  },
+  {
+    "revision": "31bf3c98cd1730d8bbf1b0dfae84e0b7",
+    "url": "/img/clients.fw.31bf3c98.png"
+  },
+  {
+    "revision": "4364afd44b02989539495cfb637377c8",
+    "url": "/img/dstvbond.png"
   },
   {
     "revision": "4bc8df534dc506d44be9794618dca7ac",
@@ -196,44 +200,44 @@ self.__precacheManifest = [
     "url": "/img/contisendtr2.c458baf0.png"
   },
   {
+    "revision": "3b637efdccd80f92a3750e066c1eb0b7",
+    "url": "/img/currency.fw.3b637efd.png"
+  },
+  {
     "revision": "f5699049b28de07f7a6927fe40fd8949",
     "url": "/img/dstv.png"
-  },
-  {
-    "revision": "4364afd44b02989539495cfb637377c8",
-    "url": "/img/dstvbond.png"
-  },
-  {
-    "revision": "9e065f3b905484a7a281a98c9ab6c1ea",
-    "url": "/img/dstvecocash.png"
   },
   {
     "revision": "9274a65af3782529b13b188ceb4a17ac",
     "url": "/img/dstvrtgs.png"
   },
   {
-    "revision": "758652c73d144c538138b3ba171fad9e",
-    "url": "/img/eurbond.png"
-  },
-  {
-    "revision": "d7c18b9b8132f14d06bc65dc6b742a0d",
-    "url": "/img/eur.png"
-  },
-  {
-    "revision": "f1fb7d467f0e87f0c4462c1999e50b5c",
-    "url": "/img/eurecocash.png"
-  },
-  {
-    "revision": "a2f6f8916d70e5df90bb5229323eb660",
-    "url": "/img/eurrtgs.png"
+    "revision": "9e065f3b905484a7a281a98c9ab6c1ea",
+    "url": "/img/dstvecocash.png"
   },
   {
     "revision": "e7864b23a5d9a0335d0e87a040b3e8bf",
     "url": "/img/eurcoins.png"
   },
   {
-    "revision": "541a81b0866b7cc9213ff4dd93703ecc",
-    "url": "/img/gbpbond.png"
+    "revision": "d7c18b9b8132f14d06bc65dc6b742a0d",
+    "url": "/img/eur.png"
+  },
+  {
+    "revision": "758652c73d144c538138b3ba171fad9e",
+    "url": "/img/eurbond.png"
+  },
+  {
+    "revision": "a2f6f8916d70e5df90bb5229323eb660",
+    "url": "/img/eurrtgs.png"
+  },
+  {
+    "revision": "f1fb7d467f0e87f0c4462c1999e50b5c",
+    "url": "/img/eurecocash.png"
+  },
+  {
+    "revision": "cab57a016ecd772dc1e884a0e362607e",
+    "url": "/img/gbpcoins.png"
   },
   {
     "revision": "c4f72fd952bf58207b3be258e7fcd66a",
@@ -244,20 +248,24 @@ self.__precacheManifest = [
     "url": "/img/gbp.png"
   },
   {
-    "revision": "cab57a016ecd772dc1e884a0e362607e",
-    "url": "/img/gbpcoins.png"
+    "revision": "541a81b0866b7cc9213ff4dd93703ecc",
+    "url": "/img/gbpbond.png"
   },
   {
     "revision": "b2517fcf68a10b09562c6e0de4501205",
     "url": "/img/gbpecocash.png"
   },
   {
+    "revision": "584e85e2b233fd9524a69a25d52141b5",
+    "url": "/img/gbprtgs.png"
+  },
+  {
     "revision": "7025312de1a8da29872a21755e7a9d4d",
     "url": "/img/gdp.fw.7025312d.png"
   },
   {
-    "revision": "584e85e2b233fd9524a69a25d52141b5",
-    "url": "/img/gbprtgs.png"
+    "revision": "f58d301ac8c89501bddc151ad7191733",
+    "url": "/img/rand.png"
   },
   {
     "revision": "1c210405cc9a4c4f01c46dd03c9d4ae2",
@@ -266,14 +274,6 @@ self.__precacheManifest = [
   {
     "revision": "cea4e17ae871dd3bacadad16de4b4ca2",
     "url": "/img/randbond.png"
-  },
-  {
-    "revision": "f58d301ac8c89501bddc151ad7191733",
-    "url": "/img/rand.png"
-  },
-  {
-    "revision": "e6cc5a1254b97009ff564eeb3d1fef3a",
-    "url": "/img/randcoins.png"
   },
   {
     "revision": "71046cd7c774b7afa599a99cdfe73614",
@@ -288,40 +288,28 @@ self.__precacheManifest = [
     "url": "/img/randrtgs.png"
   },
   {
-    "revision": "63e5a2ebe0e863e332a6172b815d2c3c",
-    "url": "/img/teller_refloat.63e5a2eb.png"
+    "revision": "e6cc5a1254b97009ff564eeb3d1fef3a",
+    "url": "/img/randcoins.png"
   },
   {
     "revision": "2d2a84a5f152a60cff15438f9bca5b85",
     "url": "/img/sells.png"
   },
   {
-    "revision": "76ebcc0b2d2ec328a405d9982ce775e8",
-    "url": "/img/sell.76ebcc0b.png"
-  },
-  {
-    "revision": "e54231c0b9603f0307979b92d2a71ee2",
-    "url": "/img/usd.png"
+    "revision": "63e5a2ebe0e863e332a6172b815d2c3c",
+    "url": "/img/teller_refloat.63e5a2eb.png"
   },
   {
     "revision": "a45660de133e0318422c4332d0cca6f6",
     "url": "/img/tellertobranch.fw.a45660de.png"
   },
   {
+    "revision": "76ebcc0b2d2ec328a405d9982ce775e8",
+    "url": "/img/sell.76ebcc0b.png"
+  },
+  {
     "revision": "44bd81379e21d638d374ee800faf1629",
     "url": "/img/tellertoteller.fw.44bd8137.png"
-  },
-  {
-    "revision": "e530036bd13e6fd29dc3987b3d85727f",
-    "url": "/img/treasarytobranch.fw.e530036b.png"
-  },
-  {
-    "revision": "f39e73905fa2ede5865f5e7667f9beb8",
-    "url": "/img/usdcoins.png"
-  },
-  {
-    "revision": "25d86b5fb51bf4aa694cb3550bc010d8",
-    "url": "/img/usdzwbond.fw.25d86b5f.png"
   },
   {
     "revision": "f15176cf83deb49408732cb65a848f41",
@@ -332,12 +320,36 @@ self.__precacheManifest = [
     "url": "/img/usdecocash.png"
   },
   {
-    "revision": "2938c07d4733ffcc5df3752ce87c69d6",
-    "url": "/img/usdzwcoins.fw.2938c07d.png"
+    "revision": "f39e73905fa2ede5865f5e7667f9beb8",
+    "url": "/img/usdcoins.png"
+  },
+  {
+    "revision": "e54231c0b9603f0307979b92d2a71ee2",
+    "url": "/img/usd.png"
+  },
+  {
+    "revision": "25d86b5fb51bf4aa694cb3550bc010d8",
+    "url": "/img/usdzwbond.fw.25d86b5f.png"
   },
   {
     "revision": "bb47df41bd6affcf34c02a8caacb9a87",
     "url": "/img/usdrtgs.png"
+  },
+  {
+    "revision": "2938c07d4733ffcc5df3752ce87c69d6",
+    "url": "/img/usdzwcoins.fw.2938c07d.png"
+  },
+  {
+    "revision": "42409eb68807ac2f3d7b71898379a7ea",
+    "url": "/img/usdzwecocash.fw.42409eb6.png"
+  },
+  {
+    "revision": "e530036bd13e6fd29dc3987b3d85727f",
+    "url": "/img/treasarytobranch.fw.e530036b.png"
+  },
+  {
+    "revision": "3a7554064ba8aa21615108034ad24ea8",
+    "url": "/img/utilities.3a755406.png"
   },
   {
     "revision": "473a2c945f62115e0efa99c05cba3026",
@@ -345,35 +357,31 @@ self.__precacheManifest = [
   },
   {
     "revision": "30e29de343b72f1f14f44ea97f2e3b7b",
-    "url": "/img/worldremit.30e29de3.png"
-  },
-  {
-    "revision": "42409eb68807ac2f3d7b71898379a7ea",
-    "url": "/img/usdzwecocash.fw.42409eb6.png"
-  },
-  {
-    "revision": "3a7554064ba8aa21615108034ad24ea8",
-    "url": "/img/utilities.3a755406.png"
-  },
-  {
-    "revision": "30e29de343b72f1f14f44ea97f2e3b7b",
     "url": "/img/worldremit.png"
-  },
-  {
-    "revision": "a7c06e1ad7d63b44962a3683d10168b6",
-    "url": "/img/zesa.png"
   },
   {
     "revision": "67280023c0d72b7bd6ef5bdf13198fb0",
     "url": "/img/utility.png"
   },
   {
+    "revision": "30e29de343b72f1f14f44ea97f2e3b7b",
+    "url": "/img/worldremit.30e29de3.png"
+  },
+  {
     "revision": "544cf67d123d409f1f02f9ca25289cc1",
     "url": "/img/zwbond.fw.png"
   },
   {
+    "revision": "a7c06e1ad7d63b44962a3683d10168b6",
+    "url": "/img/zesa.png"
+  },
+  {
     "revision": "da3348910ec5bcf032ef39bb4fcde795",
     "url": "/img/zwbond.png"
+  },
+  {
+    "revision": "97ac5c11af9b36ce4723ab1ca47c6ed2",
+    "url": "/img/zwcoins.fw.png"
   },
   {
     "revision": "0278dd3cb7b5997db292a288f34bed57",
@@ -381,27 +389,19 @@ self.__precacheManifest = [
   },
   {
     "revision": "97ac5c11af9b36ce4723ab1ca47c6ed2",
-    "url": "/img/zwcoins.fw.png"
-  },
-  {
-    "revision": "97ac5c11af9b36ce4723ab1ca47c6ed2",
     "url": "/img/zwcoinss.png"
   },
   {
-    "revision": "799e5aadda5f64d553fbd8d0c57b3aae",
-    "url": "/img/zwd.png"
-  },
-  {
-    "revision": "79c30d0ceb910233eecdd1a4bcb8a7ed",
-    "url": "/img/zwrtgs.fw.png"
+    "revision": "4ff13309984bc395d1aab71cfe6144d1",
+    "url": "/img/zwecocash.fw.png"
   },
   {
     "revision": "effe34a09d9fcb33eeec530e52658818",
     "url": "/img/zwecocash.png"
   },
   {
-    "revision": "4ff13309984bc395d1aab71cfe6144d1",
-    "url": "/img/zwecocash.fw.png"
+    "revision": "ca733ef505cd5accfd44e4add3ff01de",
+    "url": "/img/zwrtgs.png"
   },
   {
     "revision": "d1a572979c7dc85c96720352d6c618e1",
@@ -416,16 +416,16 @@ self.__precacheManifest = [
     "url": "/reg_sw.js"
   },
   {
+    "revision": "799e5aadda5f64d553fbd8d0c57b3aae",
+    "url": "/img/zwd.png"
+  },
+  {
+    "revision": "79c30d0ceb910233eecdd1a4bcb8a7ed",
+    "url": "/img/zwrtgs.fw.png"
+  },
+  {
     "revision": "7731295d59055c93c4e75820d37b7957",
     "url": "/static/icons/bwp.png"
-  },
-  {
-    "revision": "ca733ef505cd5accfd44e4add3ff01de",
-    "url": "/img/zwrtgs.png"
-  },
-  {
-    "revision": "8f830474c553ed38ea0ca56363e87ebb",
-    "url": "/static/icons/eur.png"
   },
   {
     "revision": "409ca58de6e4d680380c93cbb333c601",
@@ -436,16 +436,20 @@ self.__precacheManifest = [
     "url": "/static/icons/aud.png"
   },
   {
-    "revision": "c7f76867e2b8ffe10406d2f4ac0999ae",
-    "url": "/static/icons/jpy.png"
-  },
-  {
     "revision": "d27f4d9e46dd6c7a4c302289f798a609",
     "url": "/static/icons/gbp.png"
   },
   {
-    "revision": "9ef8c436ef52c6249fe6ba4ca70109d1",
-    "url": "/sw_main.js"
+    "revision": "8f830474c553ed38ea0ca56363e87ebb",
+    "url": "/static/icons/eur.png"
+  },
+  {
+    "revision": "c7f76867e2b8ffe10406d2f4ac0999ae",
+    "url": "/static/icons/jpy.png"
+  },
+  {
+    "revision": "5cc503d0718b07a50f2e120168684819",
+    "url": "/img/zwcoinsss.png"
   },
   {
     "revision": "53ed17b84fd549ce1e7e9b5c28647472",
@@ -456,7 +460,7 @@ self.__precacheManifest = [
     "url": "/static/icons/zar.png"
   },
   {
-    "revision": "5cc503d0718b07a50f2e120168684819",
-    "url": "/img/zwcoinsss.png"
+    "revision": "9ef8c436ef52c6249fe6ba4ca70109d1",
+    "url": "/sw_main.js"
   }
 ];
