@@ -2351,7 +2351,6 @@ app.put("/updateUsersByCol",verifyToken, verifyToken, (req,res) =>{
 	
 });
 
-
 app.put("/updateUsersByCol2",verifyToken, verifyToken, (req,res) =>{
 	console.log(req.body);
 	jwt.verify(req.token,'JesusChrist@@11', (err,authData) =>{
@@ -2371,7 +2370,6 @@ app.put("/updateUsersByCol2",verifyToken, verifyToken, (req,res) =>{
 	
 }); 
      
-       
 //Clients APIs
 app.post("/addClients",verifyToken, (req,res) => {
 	jwt.verify(req.token,'JesusChrist@@11', (err,authData) =>{
