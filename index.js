@@ -2370,7 +2370,8 @@ app.post("/addClients",verifyToken, (req,res) => {
 		if(err){
 			res.json(err)
 		}else{
-			var query = `INSERT Clients (first_name,last_name,cell,email,company_id,address,nationality,date_of_birth,status,created_by,id_number) VALUES ('${req.body.first_name}','${req.body.last_name}','${req.body.cell}','${req.body.email}','${req.body.company_id}','${req.body.address}','${req.body.nationality}','${req.body.date_of_birth}','${req.body.status}','${req.body.created_by}','${req.body.id_number}');`;
+			var query = `INSERT Clients (first_name,last_name,cell,email,company_id,address,nationality,date_of_birth,status,created_by,id_number,gender,city,province,secondaryCell) VALUES ('${req.body.first_name}','${req.body.last_name}','${req.body.cell}','${req.body.email}','${req.body.company_id}','${req.body.address}','${req.body.nationality}','${req.body.date_of_birth}','${req.body.status}','${req.body.created_by}','${req.body.id_number}','${req.body.gender}','${req.body.city}','${req.body.province}','${req.body.secondaryCell}');`;
+			console.log(query)
 			executeQueryCreate(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -2709,18 +2710,62 @@ app.post("/addTransactions", verifyToken, (req,res) => {
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from 
-(select Transactions.id,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at,Transactions.created_at AS created_at_2,MONTH(Transactions.created_at) as month ,Transactions.receive_amount,Transactions.disburse_amount,
-Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,
-(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,
-(Users.username) as created_by,Users.id as user_id,(Status.name) as status,(Branches.name) as name 
-from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
-where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id 
-and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id 
-from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id 
-where (A.created_at_2 >= CURDATE() and A.transaction_type = 'Buy') or (A.created_at_2 >= CURDATE() and A.transaction_type = 'Sell')
-order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id 
+		FROM 
+			(SELECT 
+				T.id,
+				DATE_FORMAT(T.created_at, '%a %D %b %H:%i %p') AS created_at,
+				T.created_at AS created_at_2,
+				MONTH(T.created_at) AS month,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C1.symbol AS disburse_currency,
+				C1.id AS disburse_currency_id,
+				T.client_id,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				TT.name AS transaction_type,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS C1 ON T.disburse_currency_id = C1.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				(T.created_at >= CURDATE() AND TT.name IN ('Buy', 'Sell'))
+			) AS A
+		JOIN 
+			(SELECT 
+				T.id,
+				C2.iso_code AS receive_currency,
+				C2.id AS received_currency_id 
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Currencies AS C2 ON T.receive_currency_id = C2.id
+			) AS B 
+		ON 
+			A.id = B.id
+		ORDER BY 
+			A.created_at DESC`;
+			
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -2736,7 +2781,7 @@ order by A.created_at desc`;
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select T0.id,DATE_FORMAT(T0.created_at, '%a %D %b %H:%i %p') as created_at,(T1.first_name) as first_name,
+			var query = `select T0.id,T0.client_id,DATE_FORMAT(T0.created_at, '%a %D %b %H:%i %p') as created_at,(T1.first_name) as first_name,
 							(T1.last_name) as last_name,T2.symbol as receive_currency,T0.receive_amount,T3.name as transaction_type,T4.name as status,T5.symbol as utility,T0.meter_number,T0.product,T6.username as created_by,T7.name as branch_name from Transactions T0
 							inner join Clients T1 on T0.client_id = T1.id
 							inner join Currencies T2 on T0.receive_currency_id = T2.id
@@ -2865,18 +2910,65 @@ app.post("/worldRemitApprovedPayout", verifyToken, (req,res) => {
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id,B.reversed_by,DATE_FORMAT(B.reversed_at, '%a %D %b %H:%i %p') as reversed_at from 
-(select Transactions.id,DATE_FORMAT(Transactions.created_at, '%a %D %b %H:%i %p') as created_at,MONTH(Transactions.reversed_at) as month,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,
-(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
-Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,
-(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
-where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and 
-Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-join (select T0.id,(T1.iso_code) as receive_currency,T1.id as received_currency_id,T2.username as reversed_by,T0.reversed_at from Transactions T0
-inner join Currencies T1 on T0.receive_currency_id = T1.id
-left join Users T2 on T0.reversed_by = T2.id) as B on A.id = B.id 
-where A.month >= MONTH(CURDATE())
-order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id,
+			B.reversed_by,
+			DATE_FORMAT(B.reversed_at, '%a %D %b %H:%i %p') AS reversed_at 
+		FROM 
+			(SELECT 
+				T.id,
+				DATE_FORMAT(T.created_at, '%a %D %b %H:%i %p') AS created_at,
+				MONTH(T.reversed_at) AS month,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				TT.name AS transaction_type,
+				Cu.symbol AS disburse_currency,
+				Cu.id AS disburse_currency_id,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name AS branch_name
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS Cu ON T.disburse_currency_id = Cu.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				MONTH(T.reversed_at) >= MONTH(CURDATE())
+			) AS A
+		JOIN 
+			(SELECT 
+				T0.id,
+				T1.iso_code AS receive_currency,
+				T1.id AS received_currency_id,
+				T2.username AS reversed_by,
+				T0.reversed_at 
+			FROM 
+				Transactions AS T0
+			INNER JOIN 
+				Currencies AS T1 ON T0.receive_currency_id = T1.id
+			LEFT JOIN 
+				Users AS T2 ON T0.reversed_by = T2.id
+			) AS B 
+		ON 
+			A.id = B.id 
+		ORDER BY 
+			A.created_at DESC`;
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -2893,18 +2985,63 @@ order by A.created_at desc`;
 		if(err){
 			res.json(err) 
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from 
-            (select Transactions.id,DATE_FORMAT(Transactions.created_at, '%a %D %b %H:%i %p') as created_at,MONTH(Transactions.created_at) as month ,YEAR(Transactions.created_at) as year_at,Transactions.receive_amount,Transactions.disburse_amount,
-            Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,
-            (Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,
-            (Users.username) as created_by,Users.id as user_id,(Status.name) as status,(Branches.name) as name 
-            from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
-            where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id 
-            and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-            join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id 
-            from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id 
-            where (A.month >= MONTH(CURDATE()) and A.transaction_type = 'Buy' AND A.year_at >= YEAR(CURDATE())) or (A.month >= MONTH(CURDATE()) and A.transaction_type = 'Sell' AND A.year_at >= YEAR(CURDATE()))
-            order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id 
+		FROM 
+			(SELECT 
+				T.id,
+				T.client_id,
+				DATE_FORMAT(T.created_at, '%a %D %b %H:%i %p') AS created_at,
+				MONTH(T.created_at) AS month,
+				YEAR(T.created_at) AS year_at,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C1.symbol AS disburse_currency,
+				C1.id AS disburse_currency_id,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				TT.name AS transaction_type,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS C1 ON T.disburse_currency_id = C1.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				(MONTH(T.created_at) >= MONTH(CURDATE()) AND TT.name = 'Buy' AND YEAR(T.created_at) >= YEAR(CURDATE()))
+				OR 
+				(MONTH(T.created_at) >= MONTH(CURDATE()) AND TT.name = 'Sell' AND YEAR(T.created_at) >= YEAR(CURDATE()))
+			) AS A
+		JOIN 
+			(SELECT 
+				T.id,
+				C2.iso_code AS receive_currency,
+				C2.id AS received_currency_id 
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Currencies AS C2 ON T.receive_currency_id = C2.id
+			) AS B 
+		ON 
+			A.id = B.id
+		ORDER BY 
+			A.created_at DESC`;
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -2940,7 +3077,7 @@ order by A.created_at desc`;
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select T0.id,DATE_FORMAT(T0.created_at, '%a %D %b %H:%i %p') as created_at,(T1.first_name) as first_name,
+			var query = `select T0.id,T0.client_id,DATE_FORMAT(T0.created_at, '%a %D %b %H:%i %p') as created_at,(T1.first_name) as first_name,
 							(T1.last_name) as last_name,T2.symbol as receive_currency,T0.receive_amount,T3.name as transaction_type,T4.name as status,T5.symbol as utility,T0.meter_number,T0.product,T6.username as created_by,T7.name as branch_name from Transactions T0
 							inner join Clients T1 on T0.client_id = T1.id
 							inner join Currencies T2 on T0.receive_currency_id = T2.id
@@ -2965,18 +3102,68 @@ order by A.created_at desc`;
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from 
-(select Transactions.id,Transactions.created_at as date_time,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at,MONTH(Transactions.created_at) as month ,Transactions.receive_amount,Transactions.disburse_amount,
-Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,
-(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,
-(Users.username) as created_by,Users.id as user_id,(Status.name) as status,(Branches.name) as name 
-from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
-where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id 
-and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id 
-from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id 
-where A.date_time > '${req.body.start}' and A.date_time < '${req.body.end}'
-order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id 
+		  FROM 
+			(SELECT 
+				T.id,
+				T.client_id,
+				T.created_at AS date_time,
+				DATE_FORMAT(T.created_at, '%a %D %b %H:%i %p') AS created_at,
+				MONTH(T.created_at) AS month,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C1.symbol AS disburse_currency,
+				C1.id AS disburse_currency_id,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				CONCAT(C.first_name, ' ', C.last_name) AS full_name, 
+				TT.name AS transaction_type,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name,
+				U2.username AS reversed_by,
+				DATE_FORMAT(T.reversed_at, '%a %D %b') AS reversed_at,
+				DATE_FORMAT(T.banked_at, '%a %D %b') AS banked_at
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS C1 ON T.disburse_currency_id = C1.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			LEFT JOIN 
+				Users AS U2 ON T.reversed_by = U2.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				T.created_at > '${req.body.start}' AND T.created_at < '${req.body.end}' AND T.transaction_type_id IN (1,2)
+			) AS A
+		  JOIN 
+			(SELECT 
+				T.id,
+				C2.iso_code AS receive_currency,
+				C2.id AS received_currency_id 
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Currencies AS C2 ON T.receive_currency_id = C2.id
+			) AS B 
+		  ON 
+			A.id = B.id
+		  ORDER BY 
+			A.created_at DESC`;
+			
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -2985,6 +3172,8 @@ order by A.created_at desc`;
 	
 	
 });
+
+
 
 
 
@@ -3015,7 +3204,7 @@ order by A.created_at desc`;
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select T0.id,DATE_FORMAT(T0.created_at,'%a %D %b %H:%i %p') as created_at,(T1.first_name) as first_name,
+			var query = `select T0.id,T0.client_id,DATE_FORMAT(T0.created_at,'%a %D %b %H:%i %p') as created_at,(T1.first_name) as first_name,
 (T1.last_name) as last_name,T2.symbol as receive_currency,T0.receive_amount,T3.name as transaction_type,T4.name as status,T5.symbol as utility,T0.meter_number,T0.product,T6.username as created_by,T7.name as branch_name from Transactions T0
 inner join Clients T1 on T0.client_id = T1.id
 inner join Currencies T2 on T0.receive_currency_id = T2.id
@@ -3061,7 +3250,7 @@ where T0.created_at > '${req.body.start}' and T0.created_at < '${req.body.end}'`
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from (select Transactions.id,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
+			var query = `select A.*,B.receive_currency,B.received_currency_id from (select Transactions.id,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,(Clients.id) as client_id,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
                          join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id) as B on A.id = B.id order by A.created_at desc`;
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
@@ -3107,17 +3296,62 @@ order by A.created_at desc`;
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from 
-(select Transactions.id,Transactions.created_at as created_at_2,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,
-(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
-Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,
-(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
-where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and 
-Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id from Transactions,Currencies 
-where Transactions.receive_currency_id = Currencies.id and Transactions.branch_id = ${req.body.branch_id}) as B on A.id = B.id 
-where A.created_at_2 >= CURDATE()
-order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id 
+		FROM 
+			(SELECT 
+				T.id,
+				T.created_at AS created_at_2,
+				DATE_FORMAT(T.created_at, '%a %D %b %H:%i %p') AS created_at,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				TT.name AS transaction_type,
+				Cu.symbol AS disburse_currency,
+				Cu.id AS disburse_currency_id,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name AS branch_name
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS Cu ON T.disburse_currency_id = Cu.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				T.created_at >= CURDATE()
+			) AS A
+		JOIN 
+			(SELECT 
+				T.id,
+				C.iso_code AS receive_currency,
+				C.id AS received_currency_id 
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Currencies AS C ON T.receive_currency_id = C.id
+			WHERE 
+				T.branch_id = ${req.body.branch_id}
+			) AS B 
+		ON 
+			A.id = B.id 
+		ORDER BY 
+			A.created_at DESC`;
+			
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -3296,7 +3530,7 @@ app.post("/getAllBranchTransactionsNowByIDUtilWorldRemitSpec", verifyToken, (req
 		}else{ 
 			var query = `select A.*,B.receive_currency,B.received_currency_id,B.reversed_by,DATE_FORMAT( B.reversed_at, 0) as reversed_at from 
 (select Transactions.id,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,
-(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
+(Clients.id_number) as id_number,(Clients.id) as client_id,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
 Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,
 (Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
 where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and 
@@ -3615,17 +3849,63 @@ where MONTH(T0.created_at) >= MONTH(CURDATE())`;
 		if(err){
 			res.json(err)
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from 
-(select Transactions.id,MONTH(Transactions.created_at) as month,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,
-(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
-Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,
-(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
-where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and 
-Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id from Transactions,Currencies 
-where Transactions.receive_currency_id = Currencies.id and Transactions.branch_id = ${req.body.branch_id}) as B on A.id = B.id 
-where (A.month >= MONTH((CURDATE())) and A.transaction_type = 'Buy') or (A.month >= MONTH((CURDATE())) and A.transaction_type = 'Sell')
-order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id 
+		FROM 
+			(SELECT 
+				T.id,
+				MONTH(T.created_at) AS month,
+				DATE_FORMAT(T.created_at, '%a %D %b %H:%i %p') AS created_at,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				TT.name AS transaction_type,
+				Cu.symbol AS disburse_currency,
+				Cu.id AS disburse_currency_id,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name AS branch_name
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS Cu ON T.disburse_currency_id = Cu.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				MONTH(T.created_at) >= MONTH(CURDATE())
+				AND T.transaction_type_id IN (SELECT id FROM Transaction_Type WHERE name IN ('Buy', 'Sell'))
+			) AS A
+		JOIN 
+			(SELECT 
+				T.id,
+				C.iso_code AS receive_currency,
+				C.id AS received_currency_id 
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Currencies AS C ON T.receive_currency_id = C.id
+			WHERE 
+				T.branch_id = ${req.body.branch_id}
+			) AS B 
+		ON 
+			A.id = B.id 
+		ORDER BY 
+			A.created_at DESC`;
+			
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
@@ -3690,7 +3970,7 @@ where T0.branch_id = ${req.body.branch_id} and MONTH(T0.created_at) >= MONTH(CUR
 		}else{ 
 			var query = `select A.*,B.receive_currency,B.received_currency_id from 
 (select Transactions.id,Transactions.created_at as date_time,MONTH(Transactions.created_at) as month,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,
-(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
+(Clients.id_number) as id_number,(Clients.id) as client_id,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,
 Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,
 (Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches 
 where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and 
@@ -4227,8 +4507,64 @@ where T0.created_by = ${req.body.user_id} and T0.created_at >= CURDATE()`;
 		if(err){
 			res.json(err) 
 		}else{ 
-			var query = `select A.*,B.receive_currency,B.received_currency_id from (select Transactions.id,MONTH(Transactions.created_at) as month,Transactions.created_at as date_time,DATE_FORMAT(Transactions.created_at,'%a %D %b %H:%i %p') as created_at ,Transactions.receive_amount,Transactions.disburse_amount,Transactions.rate,(Clients.id_number) as id_number,(Clients.first_name) as first_name,(Clients.last_name) as last_name,(Transaction_Type.name) as transaction_type,Currencies.symbol as disburse_currency,Currencies.id as disburse_currency_id,(Users.username) as created_by,Users.id as user_id,(Status.name) as status,(Branches.name) as name from Transactions,Transaction_Type,Currencies,Clients,Users,Status,Branches where Transactions.client_id = Clients.id and Transactions.transaction_type_id = Transaction_Type.id and Transactions.branch_id = Branches.id and Transactions.disburse_currency_id = Currencies.id and Transactions.created_by = Users.id and Transactions.status = Status.id) as A
-join (select Transactions.id,(Currencies.iso_code) as receive_currency,Currencies.id as received_currency_id from Transactions,Currencies where Transactions.receive_currency_id = Currencies.id and Transactions.created_by = ${req.body.user_id}) as B on A.id = B.id where (A.month >= MONTH(CURDATE()) and A.transaction_type = 'Buy') or (A.month >= MONTH(CURDATE()) and A.transaction_type = 'Sell') order by A.created_at desc`;
+			var query = `SELECT 
+			A.*,
+			B.receive_currency,
+			B.received_currency_id 
+		FROM 
+			(SELECT 
+				T.id,
+				MONTH(T.created_at) AS month,
+				T.created_at AS date_time,
+				DATE_FORMAT(T.created_at,'%a %D %b %H:%i %p') AS created_at,
+				T.receive_amount,
+				T.disburse_amount,
+				T.rate,
+				C.id_number,
+				C.first_name,
+				C.last_name,
+				TT.name AS transaction_type,
+				Cu.symbol AS disburse_currency,
+				Cu.id AS disburse_currency_id,
+				U.username AS created_by,
+				U.id AS user_id,
+				S.name AS status,
+				B.name AS branch_name
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Transaction_Type AS TT ON T.transaction_type_id = TT.id
+			INNER JOIN 
+				Currencies AS Cu ON T.disburse_currency_id = Cu.id
+			INNER JOIN 
+				Clients AS C ON T.client_id = C.id
+			INNER JOIN 
+				Users AS U ON T.created_by = U.id
+			INNER JOIN 
+				Status AS S ON T.status = S.id
+			INNER JOIN 
+				Branches AS B ON T.branch_id = B.id
+			WHERE 
+				MONTH(T.created_at) >= MONTH(CURDATE())
+				AND T.transaction_type_id IN (SELECT id FROM Transaction_Type WHERE name IN ('Buy', 'Sell'))
+			) AS A
+		JOIN 
+			(SELECT 
+				T.id,
+				C.iso_code AS receive_currency,
+				C.id AS received_currency_id 
+			FROM 
+				Transactions AS T
+			INNER JOIN 
+				Currencies AS C ON T.receive_currency_id = C.id
+			WHERE 
+				T.created_by = ${req.body.user_id}
+			) AS B 
+		ON 
+			A.id = B.id 
+		ORDER BY 
+			A.created_at DESC`;
+			
 	executeQuery(res, query).catch(err =>{
 		console.log(err)
 	})
